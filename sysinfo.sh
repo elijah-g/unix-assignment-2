@@ -5,7 +5,7 @@
 #Define variables for executables
 FREE="/bin/free -h"
 DF="/bin/df"
-IFCONFIG="/bin/ifocnfig"
+IFCONFIG="/bin/ifconfig"
 UPTIME="/bin/uptime -p"
 
 
@@ -33,19 +33,19 @@ if [ -n "$1" ]; then
 	case "$1" in
 
 	-memory) echo "**Memory Report**"
-		eval $FREE
+		eval "$FREE"
 		;;
 
 	-disk) echo "**Disk Space Report**"
-		eval $DF
+		eval "$DF"
 		;;
 
 	-network) echo "**Network Report**"
-		eval $IFCONIG
+		eval "$IFCONFIG"
 		;;
 
 	-uptime) echo "**Uptime Report**"
-		eval $UPTIME
+		eval "$UPTIME"
 		;;	
 
 	-help) echo "**Help Requested**"
