@@ -2,6 +2,13 @@
 #Elijah Glass - S3679959
 
 
+#Define variables for executables
+FREE="/bin/free -h"
+DF="/bin/df"
+IFCONFIG="/bin/ifocnfig"
+UPTIME="/bin/uptime -p"
+
+
 #Function that can be reused to give guidance if an innapropriate argument is given
 function help_required {
 	echo "Usage: sysinfo [-memory][-disk][-network][-uptime][-help]"
@@ -15,6 +22,10 @@ function help_required {
 }
 
 
+if [ "$#" -ne 1 ]; then
+    echo "Script only takes one parameter... Ignoring all except the first"
+fi
+
 #Check to see if an argument was specified
 if [ -n "$1" ]; then
 	
@@ -22,19 +33,19 @@ if [ -n "$1" ]; then
 	case "$1" in
 
 	-memory) echo "**Memory Report**"
-		free -h 
+		eval $FREE
 		;;
 
 	-disk) echo "**Disk Space Report**"
-		df
+		eval $DF
 		;;
 
 	-network) echo "**Network Report**"
-		ifconfig
+		eval $IFCONIG
 		;;
 
 	-uptime) echo "**Uptime Report**"
-		uptime -p
+		eval $UPTIME
 		;;	
 
 	-help) echo "**Help Requested**"
