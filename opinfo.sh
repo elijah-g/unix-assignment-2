@@ -1,6 +1,19 @@
 #!/bin/bash
 #Elijah Glass - S3679959
 
+#Define variables for executables
+GREP="/bin/grep"
+PGREP="/bin/pgrep"
+PS="/bin/ps"
+GETOPTS="/bin/getopts"
+ECHO="bin/echo"
+ID="/bin/id"
+WC="/bin/wc"
+LSOF="/bin/lsof"
+CAT="/bin/cat"
+AWK="/bin/awk"
+EXPR="bin/expr"
+
 
 #Function that can be reused to give guidance if an innapropriate argument is given
 function help_required {
@@ -48,9 +61,13 @@ if [ -n "$1" ]; then
 				;;
 
 			o)
-				
+				#find current username
 				user="$(id -u -n)"
+
+				#Find number of file descriptors open by user.
 				num_fd="$(lsof -a -d 0-999 -u $user | wc -l)"
+
+				#Display the output nicely on the screen
 				echo "Number of open file descriptors for $user: $num_fd"
 				;;
 
@@ -69,7 +86,8 @@ if [ -n "$1" ]; then
 				;;
 
 			*)
-				echo "inavalid option"
+				echo "Inavalid option"
+				help_required
 
 		esac
 	done
