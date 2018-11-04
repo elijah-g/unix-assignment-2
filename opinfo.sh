@@ -17,7 +17,7 @@ EXPR="bin/expr"
 
 #Function that can be reused to give guidance if an innapropriate argument is given
 function help_required {
-	echo "Usage: sysinfo [-c][-p][-r][-o][-m]"
+	echo "Usage: opinfo [-c][-p][-r][-o][-m]"
 	echo
 	echo "-c     the number of cpu cores on the system"
 	echo "-p     the current process' priority (nice number)"
@@ -39,10 +39,10 @@ if [ -n "$1" ]; then
 
 			p)	
 				#Find the pid of this script using pgrep		
-				pid="$(pgrep -f $0)"
+				pid="$(pgrep -f "$0")"
 				
 				#Find it's priority number using ps
-				priority="$(ps --no-headers -o ni $pid)"
+				priority="$(ps --no-headers -o ni "$pid")"
 
 				#Display the output nicely on the screen
 				echo "Current process nice priority number:$priority"
@@ -54,7 +54,7 @@ if [ -n "$1" ]; then
 
 				#Count using wc thee number of line of the output of ps for specific user
 				#each process has a line hence number of lines = number of processes
-				num_processes="$(ps --no-headers -U $user | wc -l)"
+				num_processes="$(ps --no-headers -U "$user" | wc -l)"
 
 				#Display the output nicely on the screen
 				echo "Number of process for user $user: $num_processes"
@@ -65,7 +65,7 @@ if [ -n "$1" ]; then
 				user="$(id -u -n)"
 
 				#Find number of file descriptors open by user.
-				num_fd="$(lsof -a -d 0-999 -u $user | wc -l)"
+				num_fd="$(lsof -a -d 0-999 -u "$user" | wc -l)"
 
 				#Display the output nicely on the screen
 				echo "Number of open file descriptors for $user: $num_fd"
@@ -79,9 +79,9 @@ if [ -n "$1" ]; then
 				total="$(cat /proc/sys/fs/file-max)"
 
 				#calculate available file descriptors. Subtract occupied from total
-				available="$(expr $total - $occupied)"
+				available="$(expr "$total" - "$occupied")"
 
-				#Display the output nicely on the screen
+				#Display the output nice"ly on the screen
 				echo "Number of available file descriptors: $available"
 				;;
 
@@ -96,4 +96,4 @@ if [ -n "$1" ]; then
 else
 	echo "No argument was specified"
 	help_required
-if
+fi
