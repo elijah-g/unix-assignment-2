@@ -1,4 +1,5 @@
 #!/bin/bash
+#Elijah Glass S3679959
 
 #Trap CTRL + C
 dtrap '' 2
