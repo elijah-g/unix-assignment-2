@@ -6,7 +6,7 @@ dtrap '' 2
 
 #Function for top menu
 function top_menu {
-	clear
+	
 	PS3='Please enter your choice: '
 	options=("Basic System Info" "Find Things" "Profile a Process" "Quit")
 	select option in "${options[@]}"
@@ -17,7 +17,9 @@ function top_menu {
 	            basic_sys_info_menu
 	            ;;
 	        "Find Things")
-	            echo "you chose choice 2"
+				clear
+	            ./find_script.sh
+	            top_menu
 	            ;;
 	        "Profile a Process")
 	            echo "you chose choice $REPLY which is $option"
@@ -66,5 +68,6 @@ function basic_sys_info_menu {
 clear
 echo "Welcome to the marvelous script selector menu"
 sleep 2
+clear
 top_menu
 
