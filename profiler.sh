@@ -1,7 +1,8 @@
 #!/bin/bash
 #Elijah Glass S3679959
 
-
+#Trap CTRL + C
+trap '' 2
 
 read -p "Which program would you like to profile? " program
 
@@ -51,7 +52,7 @@ do
 #Command which cleverly selects processes containing the specified program.
 done < <(ps aux | awk '/'"$re_prep1"''"$re_prep2"'/ {print $11}')
 
-#ps aux | awk '/'"$re_prep1"''"$re_prep2"'/ {print $11}
+
 
 sorted_unique_ids=($(echo "${program_array[@]}" | tr ' ' '\n' | sort -u | tr '\n' ' '))
 
@@ -63,8 +64,13 @@ echo #"${final[@]}"
 #Check number of results
 arraylength=${#final[@]}
 
+if [ $arraylength -eq 0 ]; then
+	echo "Your selected program does not exist or is not running"
+	exit
+fi
+
 #If multiple results ask which they'd like
-if [ $arraylength -ne 1 ]; then
+if [ $arraylength -gt 1 ]; then
 	echo "More than one match. Pick your program...."
 
 	for j in "${!final[@]}";
@@ -88,6 +94,52 @@ fi
 
 #Check if valid option....
 echo "okay profiling ${final[$selection]}......"
+echo 
 
+#function to allow for selection of what to monitor
+function select_monitor {
+	PS3="Select the thing to monitor: "
+	options=("Memory" "CPU")
+	select option in "${options[@]}"
+	do
+	    case $option in
+	        "Memory")
+				#Call script which performs the function and run in background
+				./profiler_monitor.sh -m "${final[$selection]}" &
+				stop=0
+				#Monitor for when enter is pressed to kill the background script and exit this one
+				while [ $stop -eq 0 ]; do
+					read stop
+					if [[ $stop = "" ]]; then
+						kill -9 $!
+						exit
+					fi
 
+				done
+				# pid=$!
+	   #          kill $pid
+	            ;;
+	        "CPU")
+	            #Call script which performs the function and runs in background
+	            ./profiler_monitor.sh -c "${final[$selection]}" &
+	            
+	            stop=0
+	            #Monitor for when enter is pressed to kill the background script and exit this one
+				while [ $stop -eq 0 ]; do
+					read stop
+					if [[ $stop = "" ]]; then
+						kill -9 $!
+						exit
+					fi
+				done
+	            ;;
+	        *) 
+				echo "invalid option $REPLY... Try Again."
+				select_monitor
+				break
+				;;
+	    esac
+	done
+}
 
+select_monitor

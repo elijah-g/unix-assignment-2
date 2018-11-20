@@ -2,7 +2,7 @@
 #Elijah Glass S3679959
 
 #Trap CTRL + C
-dtrap '' 2
+trap '' 2
 
 #Function for top menu
 function top_menu {
@@ -22,7 +22,9 @@ function top_menu {
 	            top_menu
 	            ;;
 	        "Profile a Process")
-	            echo "you chose choice $REPLY which is $option"
+	            clear
+	            ./profiler.sh
+	            top_menu
 	            ;;
 	        "Quit")
 				echo "Quiting...."

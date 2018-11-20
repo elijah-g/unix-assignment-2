@@ -130,9 +130,9 @@ function find_command {
 	#check for a returned 1 and prompt user to try again.
 	if [ "$?" -eq 1 ] ; then
 		echo "One or more of the options you specified were not correct check man find and try again."
-		echo "Script Restarting...."
+		echo "exiting script...."
 		echo
-		exec "./find_script.sh"
+		exit
 	fi
 }
 
