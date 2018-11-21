@@ -1,6 +1,16 @@
 #!/bin/bash
 #Elijah Glass S3679959
 
+
+#Define variables for executables
+PS="/bin/ps"
+AWK="/bin/awk"
+ECHO="/bin/echo"
+TR="/bin/tr"
+SORT="/bin/sort"
+KILL="/bin/kill"
+
+
 #Trap CTRL + C
 trap '' 2
 
@@ -9,12 +19,10 @@ read -p "Which program would you like to profile? " program
 #Prepare the program for use in regular expression
 re_prep1= echo "$program" | cut -c 1
 re_prep1="$(echo -e "${re_prep1}" | tr -d '[:space:]')"
-
 re_prep2="${program:1}"
 re_prep2="$(echo -e "${re_prep2}" | tr -d '[:space:]')"
-# re_prep1= '\[$re_prep1\]'
 
-#echo "$re_prep1$re_prep2"
+
 #Set counter for while loop
 count=0
 
@@ -53,20 +61,25 @@ do
 done < <(ps aux | awk '/'"$re_prep1"''"$re_prep2"'/ {print $11}')
 
 
-
+#sort the array. 
 sorted_unique_ids=($(echo "${program_array[@]}" | tr ' ' '\n' | sort -u | tr '\n' ' '))
 
+
+#Remove duplicates.
 final=($(echo "${sorted_unique_ids[@]}" | awk '/'"$re_prep1"''"$re_prep2"'/ {print $0}'))
 
-echo #"${final[@]}"
+#Create some space.
+echo
 
 
 #Check number of results
 arraylength=${#final[@]}
 
+
+#If not results return the error and exit program
 if [ $arraylength -eq 0 ]; then
-	echo "Your selected program does not exist or is not running"
-	exit
+	echo "Your selected program does not exist or is not running TRY AGAIN"
+	exit 1
 fi
 
 #If multiple results ask which they'd like

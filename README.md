@@ -31,6 +31,9 @@ AUTHOR
 Linux 									Last change: NOVEMBER 2018
 
 
+
+
+
 #Requirement 2 - opinfo.sh
 NAME
 	opinfo - Operation Information
@@ -60,4 +63,90 @@ AUTHOR
 Linux 									Last change: NOVEMBER 2018	
 
 
-#	
+
+
+
+#Part C | Requirement 1 - Find Script
+
+NAME
+	find_script - Find Script
+
+SYNOPSIS
+	./find_script.sh
+
+DESCRIPTION
+	Find Script is a user friendly menu interface for the popular unix command "find"
+	asking for user input to specific questions to help the user find what they're looking
+	for and execute the appropriate action on the findings. Find Script also enables the
+	user to enter their own 'scriplet' to execute on results.
+
+OPTIONS
+	No options available this is a menu based script
+
+FILES
+	find_script.sh
+		The script which runs as is, requires user input via prompts
+
+AUTHOR
+	Elijah Glass (s3679959) s3679959@student.rmit.edu.au
+
+Linux 									Last change: NOVEMBER 2018
+
+
+
+
+#Part C | Requirement 2 - Basic Profiler
+
+NAME
+	 profiler - Basic Profiler
+
+SYNOPSIS
+	./profiler.sh
+
+DESCRIPTION
+	Basic Profiler is a user friendly way for live monitoring or a programs strain on your
+	systems resources. The menu driven program simply asks for a program and what you'd like 
+	to monitor either CPU or Memory and displays the result every second. Best used in 
+	conjunction with script_call_menu.
+
+OPTIONS
+	No options available this is a menu based script
+
+FILES
+	profiler.sh
+		The script which runs as is, requires user input via prompts
+	profiler_monitor.sh
+		A script called by profiler.sh which returns the usage every second.
+
+AUTHOR
+	Elijah Glass (s3679959) s3679959@student.rmit.edu.au
+
+Linux 									Last change: NOVEMBER 2018
+
+
+
+
+#Part C | Requirement 3 - Menu System
+
+NAME
+	 script-call-menu - Menu System
+
+SYNOPSIS
+	./script-call-menu.sh
+
+DESCRIPTION
+	A menu driven script which is specifically designed to call the other scripts in this 
+	package.
+
+OPTIONS
+	No options available this is a menu based script
+
+FILES
+	script-call-menu.sh
+		The script which runs as is, requires user input via prompts.
+
+AUTHOR
+	Elijah Glass (s3679959) s3679959@student.rmit.edu.au
+
+Linux 									Last change: NOVEMBER 2018
+

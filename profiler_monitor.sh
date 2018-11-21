@@ -1,6 +1,14 @@
 #!/bin/bash
 #Elijah Glass S3679959
 
+
+#Define variables for executables
+PS="/bin/ps"
+PIDOF="/bin/pidof"
+ECHO="/bin/echo"
+SED="/bin/sed"
+SLEEP="/bin/sleep"
+
 #Create some space
 echo 
 

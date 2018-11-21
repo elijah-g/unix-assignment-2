@@ -1,6 +1,12 @@
 #!/bin/bash
 #Elijah Glass S3679959
 
+
+#Define variables for executables
+ECHO="/bin/echo"
+CLEAR="bin/clear"
+
+
 #Trap CTRL + C
 trap '' 2
 
@@ -66,10 +72,16 @@ function basic_sys_info_menu {
 
 
 
-
+#Get the program started by clearing the screen
 clear
+
+#Then display an obnoxious message for a few seconds
 echo "Welcome to the marvelous script selector menu"
 sleep 2
+
+#Be humble
 clear
+
+#Run the menu!
 top_menu
 
